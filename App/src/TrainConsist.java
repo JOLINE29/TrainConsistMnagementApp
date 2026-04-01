@@ -1,27 +1,31 @@
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TrainConsist {
     public static void main(String[] args) {
-        // Create an ArrayList to store passenger bogies
-        ArrayList<String> passengerBogies = new ArrayList<>();
+        // Create a HashSet to store unique bogie IDs
+        Set<String> bogieIds = new HashSet<>();
 
-        // 1. Add passenger bogies to the train
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        // Adding bogie IDs to the system
+        System.out.println("Adding bogies to the train...");
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
 
-        // 2. Display the initial list of bogies
-        System.out.println("Initial Train Consist: " + passengerBogies);
+        // Intentionally adding a duplicate value to test uniqueness
+        System.out.println("Attempting to add duplicate ID: BG101");
+        boolean isAdded = bogieIds.add("BG101");
 
-        // 3. Remove a specific bogie (e.g., AC Chair)
-        passengerBogies.remove("AC Chair");
-        System.out.println("After removing AC Chair: " + passengerBogies);
+        if (!isAdded) {
+            System.out.println("Duplicate ID BG101 was ignored by the system.");
+        }
 
-        // 4. Check if a specific bogie exists (e.g., Sleeper)
-        boolean hasSleeper = passengerBogies.contains("Sleeper");
-        System.out.println("Does the train have a Sleeper bogie? " + hasSleeper);
+        // Display the final set of unique IDs
+        System.out.println("\nFinal Train Consist (Unique Bogie IDs):");
+        for (String id : bogieIds) {
+            System.out.println("Bogie ID: " + id);
+        }
 
-        // 5. Print the final state of the train consist
-        System.out.println("Final Train Consist: " + passengerBogies);
+        System.out.println("\nTotal unique bogies: " + bogieIds.size());
     }
 }
