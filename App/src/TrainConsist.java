@@ -1,26 +1,27 @@
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * UC1: Initialize Train and Display Consist Summary
- * This class serves as the entry point for the Train Consist Management App.
- */
 public class TrainConsist {
-
     public static void main(String[] args) {
-        // 1. Application prints welcome message
-        System.out.println("=== Train Consist Management App ===");
+        // Create an ArrayList to store passenger bogies
+        ArrayList<String> passengerBogies = new ArrayList<>();
 
-        // 2. Initialize the train consist using a dynamic ArrayList
-        // We use the List interface for abstraction
-        List<String> bogies = new ArrayList<>();
+        // 1. Add passenger bogies to the train
+        passengerBogies.add("Sleeper");
+        passengerBogies.add("AC Chair");
+        passengerBogies.add("First Class");
 
-        // 3. Display the initial state of the train
-        // Using .size() to show the count of bogies in the collection [cite: 1]
-        System.out.println("Train consist initialized.");
-        System.out.println("Initial Bogie Count: " + bogies.size());
+        // 2. Display the initial list of bogies
+        System.out.println("Initial Train Consist: " + passengerBogies);
 
-        // 4. Program continues [cite: 1]
-        System.out.println("Ready for further operations.");
+        // 3. Remove a specific bogie (e.g., AC Chair)
+        passengerBogies.remove("AC Chair");
+        System.out.println("After removing AC Chair: " + passengerBogies);
+
+        // 4. Check if a specific bogie exists (e.g., Sleeper)
+        boolean hasSleeper = passengerBogies.contains("Sleeper");
+        System.out.println("Does the train have a Sleeper bogie? " + hasSleeper);
+
+        // 5. Print the final state of the train consist
+        System.out.println("Final Train Consist: " + passengerBogies);
     }
 }
