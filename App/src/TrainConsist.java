@@ -1,33 +1,31 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TrainConsist {
     public static void main(String[] args) {
-        // Create a LinkedHashSet to represent the train formation
-        // This ensures uniqueness and preserves insertion order
-        Set<String> trainFormation = new LinkedHashSet<>();
+        // 1. Create a HashMap to store bogie-capacity mapping
+        HashMap<String, Integer> bogieCapacityMap = new HashMap<>();
 
-        // 1. Attach bogies to the engine
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
+        // 2. Use the put() method to map bogie names to their capacities
+        bogieCapacityMap.put("Sleeper", 72);
+        bogieCapacityMap.put("AC Chair", 56);
+        bogieCapacityMap.put("First Class", 24);
+        bogieCapacityMap.put("Rectangular Goods", 100); // Representing load capacity
+        bogieCapacityMap.put("Cylindrical Goods", 80);
 
-        System.out.println("Initial Formation: " + trainFormation);
+        System.out.println("--- Train Bogie Capacity Details ---");
 
-        // 2. Attempt to attach a duplicate bogie (e.g., Sleeper again) [cite: 1]
-        // LinkedHashSet will automatically ignore this duplicate [cite: 1]
-        boolean isAdded = trainFormation.add("Sleeper");
-
-        if (!isAdded) {
-            System.out.println("\nDuplicate bogie 'Sleeper' detected! Attachment ignored.");
+        // 3. Iterate through the map using entrySet() to display details
+        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
+            String bogieName = entry.getKey();
+            Integer capacity = entry.getValue();
+            System.out.println("Bogie: " + bogieName + " | Capacity: " + capacity);
         }
 
-        // 3. Display the final formation order [cite: 1]
-        // The order remains: Engine -> Sleeper -> Cargo -> Guard [cite: 1]
-        System.out.println("\nFinal Train Formation (Order Preserved):");
-        for (String bogie : trainFormation) {
-            System.out.println("- " + bogie);
+        // 4. Fast lookup example
+        String searchBogie = "Sleeper";
+        if (bogieCapacityMap.containsKey(searchBogie)) {
+            System.out.println("\nQuick Lookup: " + searchBogie + " has a capacity of " + bogieCapacityMap.get(searchBogie));
         }
     }
 }
