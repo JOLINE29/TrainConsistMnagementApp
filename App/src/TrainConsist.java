@@ -1,31 +1,40 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class TrainConsist {
+    // 1. You can declare the list here (Class level)
+    static List<Bogie> bogies = new ArrayList<>();
+
     public static void main(String[] args) {
-        // 1. Create a HashMap to store bogie-capacity mapping
-        HashMap<String, Integer> bogieCapacityMap = new HashMap<>();
+        // 2. ACTION: You must call .add() inside a method (like main)
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("General", 90));
 
-        // 2. Use the put() method to map bogie names to their capacities
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 56);
-        bogieCapacityMap.put("First Class", 24);
-        bogieCapacityMap.put("Rectangular Goods", 100); // Representing load capacity
-        bogieCapacityMap.put("Cylindrical Goods", 80);
+        // 3. Sort logic
+        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
 
-        System.out.println("--- Train Bogie Capacity Details ---");
+        // 4. Output
+        System.out.println("Sorted Bogies:");
+        bogies.forEach(System.out::println);
+    }
+}
 
-        // 3. Iterate through the map using entrySet() to display details
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            String bogieName = entry.getKey();
-            Integer capacity = entry.getValue();
-            System.out.println("Bogie: " + bogieName + " | Capacity: " + capacity);
-        }
+class Bogie {
+    private String type;
+    private int capacity;
 
-        // 4. Fast lookup example
-        String searchBogie = "Sleeper";
-        if (bogieCapacityMap.containsKey(searchBogie)) {
-            System.out.println("\nQuick Lookup: " + searchBogie + " has a capacity of " + bogieCapacityMap.get(searchBogie));
-        }
+    public Bogie(String type, int capacity) {
+        this.type = type;
+        this.capacity = capacity;
+    }
+
+    public int getCapacity() { return capacity; }
+
+    @Override
+    public String toString() {
+        return type + " - Capacity: " + capacity;
     }
 }
