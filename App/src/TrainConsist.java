@@ -1,30 +1,33 @@
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class TrainConsist {
     public static void main(String[] args) {
-        // 1. Create a LinkedList<String> for the consist
-        LinkedList<String> trainConsist = new LinkedList<>();
+        // Create a LinkedHashSet to represent the train formation
+        // This ensures uniqueness and preserves insertion order
+        Set<String> trainFormation = new LinkedHashSet<>();
 
-        // 2. Add initial bogies: Engine, Sleeper, AC, Cargo, Guard
-        trainConsist.add("Engine");
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC");
-        trainConsist.add("Cargo");
-        trainConsist.add("Guard");
+        // 1. Attach bogies to the engine
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
 
-        System.out.println("Initial Train Consist: " + trainConsist);
+        System.out.println("Initial Formation: " + trainFormation);
 
-        // 3. Insert a Pantry Car at position 2 (index 2)
-        // This demonstrates the efficiency of inserting in the middle of a LinkedList [cite: 1]
-        trainConsist.add(2, "Pantry Car");
-        System.out.println("After adding Pantry Car: " + trainConsist);
+        // 2. Attempt to attach a duplicate bogie (e.g., Sleeper again) [cite: 1]
+        // LinkedHashSet will automatically ignore this duplicate [cite: 1]
+        boolean isAdded = trainFormation.add("Sleeper");
 
-        // 4. Remove the first and last bogie [cite: 1]
-        // Using removeFirst() and removeLast() to detach head and tail [cite: 1]
-        trainConsist.removeFirst();
-        trainConsist.removeLast();
+        if (!isAdded) {
+            System.out.println("\nDuplicate bogie 'Sleeper' detected! Attachment ignored.");
+        }
 
-        // 5. Display the final ordered train consist [cite: 1]
-        System.out.println("Final Ordered Train Consist: " + trainConsist);
+        // 3. Display the final formation order [cite: 1]
+        // The order remains: Engine -> Sleeper -> Cargo -> Guard [cite: 1]
+        System.out.println("\nFinal Train Formation (Order Preserved):");
+        for (String bogie : trainFormation) {
+            System.out.println("- " + bogie);
+        }
     }
 }
