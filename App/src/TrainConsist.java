@@ -1,30 +1,40 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class TrainConsist {
+    // 1. You can declare the list here (Class level)
+    static List<Bogie> bogies = new ArrayList<>();
+
     public static void main(String[] args) {
-        // 1. Create a LinkedList<String> for the consist
-        LinkedList<String> trainConsist = new LinkedList<>();
+        // 2. ACTION: You must call .add() inside a method (like main)
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("General", 90));
 
-        // 2. Add initial bogies: Engine, Sleeper, AC, Cargo, Guard
-        trainConsist.add("Engine");
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC");
-        trainConsist.add("Cargo");
-        trainConsist.add("Guard");
+        // 3. Sort logic
+        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
 
-        System.out.println("Initial Train Consist: " + trainConsist);
+        // 4. Output
+        System.out.println("Sorted Bogies:");
+        bogies.forEach(System.out::println);
+    }
+}
 
-        // 3. Insert a Pantry Car at position 2 (index 2)
-        // This demonstrates the efficiency of inserting in the middle of a LinkedList [cite: 1]
-        trainConsist.add(2, "Pantry Car");
-        System.out.println("After adding Pantry Car: " + trainConsist);
+class Bogie {
+    private String type;
+    private int capacity;
 
-        // 4. Remove the first and last bogie [cite: 1]
-        // Using removeFirst() and removeLast() to detach head and tail [cite: 1]
-        trainConsist.removeFirst();
-        trainConsist.removeLast();
+    public Bogie(String type, int capacity) {
+        this.type = type;
+        this.capacity = capacity;
+    }
 
-        // 5. Display the final ordered train consist [cite: 1]
-        System.out.println("Final Ordered Train Consist: " + trainConsist);
+    public int getCapacity() { return capacity; }
+
+    @Override
+    public String toString() {
+        return type + " - Capacity: " + capacity;
     }
 }
